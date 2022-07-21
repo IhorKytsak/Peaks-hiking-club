@@ -1,0 +1,117 @@
+@mixin btn1($top-bottom, $left-right, $mr, $mb, $col, $bcol, $br) {
+   padding: $top-bottom $left-right;
+   margin-right: $mr;
+   margin-bottom: $mb;
+   color: $col;
+   background-color: $bcol;
+   border-radius: $br;
+
+   &:hover {
+      background-color: $col;
+      color: $bcol;
+   }
+   transition: all 0.2s linear;
+}
+
+$colors1: (
+   darkGrey1: #2c2f3c,
+   skyBlue1: #14a0c7,
+   skyBlue2: #2e5cd2,
+   midnightBlue1: #21232e,
+   white1: #ffffff,
+   limeGreen1: #699900,
+   limeGreen2: #65950e,
+   white2: #c0b6bf,
+   orange1: #ff4e33,
+);
+
+@function setColor1($key) {
+   @if map-has-key($colors1, $key) {
+      @return map-get($colors1, $key);
+   }
+
+   @warn "Unknown `#{$key}` in $colors1.";
+   @return null;
+}
+
+.header {
+   background: url("../img/m-h-day.jpg") center no-repeat;
+   background-size: cover;
+
+   .header-wrap {
+      .header_heading {
+         color: setColor1(darkGrey1);
+
+         span {
+            background: linear-gradient(
+               0deg,
+               transparent 10%,
+               setColor1(skyBlue1) 10%,
+               setColor1(skyBlue1) 65%,
+               transparent 65%
+            );
+         }
+      }
+
+      .header_text {
+         color: #2c2f3c;
+      }
+
+      .header_button {
+         @include btn1(15px, 40px, 150px, 175px, setColor1(white1), setColor1(limeGreen1), 3px);
+      }
+   }
+}
+
+.landing-logo {
+   p {
+      color: setColor1(darkGrey1);
+   }
+}
+
+.section {
+   .section_text {
+      color: setColor1(darkGrey1);
+      span {
+         background: linear-gradient(0deg, transparent 18%, setColor1(skyBlue1) 18%, setColor1(skyBlue1) 65%);
+      }
+   }
+
+   .section_card_wrap {
+      .section_card {
+         background-color: setColor1(midnightBlue1);
+
+         .section_card_right_container {
+            .section_card_heading {
+               color: setColor1(white1);
+            }
+
+            .section_card_text {
+               color: setColor1(white2);
+            }
+         }
+      }
+   }
+
+   .section_banner {
+      background: linear-gradient(90deg, setColor1(limeGreen2), setColor1(skyBlue2));
+
+      .section_banner_heading {
+         span {
+            background: linear-gradient(0deg, transparent 15%, setColor1(skyBlue1) 15%, setColor1(skyBlue1) 65%);
+         }
+      }
+
+      .section_banner_text {
+         color: setColor1(white2);
+      }
+
+      .section_banner_button {
+         @include btn1(15px, 40px, 0, 0, setColor1(white1), setColor1(limeGreen1), 3px);
+      }
+   }
+}
+
+.footer {
+   background-color: setColor1(midnightBlue1);
+}

@@ -1,0 +1,124 @@
+@mixin btn2($top-bottom, $left-right, $mr, $mb, $col, $bcol, $br) {
+   padding: $top-bottom $left-right;
+   margin-right: $mr;
+   margin-bottom: $mb;
+   color: $col;
+   background-color: $bcol;
+   border-radius: $br;
+
+   &:hover {
+      background-color: $col;
+      color: $bcol;
+   }
+   transition: all 0.2s linear;
+}
+
+$colors2: (
+   darkGrey1: #2c2f3c,
+   darkGrey2: #3b3f50,
+   skyBlue1: #14a0c7,
+   skyBlue2: #2e5cd2,
+   midnightBlue1: #21232e,
+   white1: #ffffff,
+   limeGreen1: #699900,
+   limeGreen2: #65950e,
+   white2: #c0b6bf,
+   orange1: #ff4e33,
+   yellou1: #e3ac00,
+);
+
+@function setColor2($key) {
+   @if map-has-key($colors2, $key) {
+      @return map-get($colors2, $key);
+   }
+
+   @warn "Unknown `#{$key}` in $colors2.";
+   @return null;
+}
+
+body {
+   background-color: setColor2(midnightBlue1);
+}
+
+.header {
+   background: url("../img/m-h-night.jpg") center no-repeat;
+   background-size: cover;
+
+   .header-wrap {
+      .header_heading {
+         color: setColor2(white1);
+
+         span {
+            background: linear-gradient(
+               0deg,
+               transparent 10%,
+               setColor2(orange1) 10%,
+               setColor2(orange1) 65%,
+               transparent 65%
+            );
+         }
+      }
+
+      .header_text {
+         color: setColor2(white1);
+      }
+
+      .header_button {
+         @include btn2(15px, 40px, 150px, 175px, setColor2(white1), setColor2(yellou1), 3px);
+      }
+   }
+}
+
+.landing-logo {
+   p {
+      color: setColor2(white1);
+   }
+}
+
+.section {
+   .section_text {
+      color: setColor2(white1);
+      span {
+         background: linear-gradient(0deg, transparent 18%, setColor2(orange1) 18%, setColor2(orange1) 65%);
+      }
+   }
+
+   .section_card_wrap {
+      .section_card {
+         background-color: setColor2(darkGrey2);
+
+         .section_card_right_container {
+            .section_card_heading {
+               color: setColor2(white1);
+            }
+
+            .section_card_text {
+               color: setColor2(white2);
+            }
+         }
+      }
+   }
+
+   .section_banner {
+      background: linear-gradient(90deg, setColor2(yellou1), setColor2(orange1));
+
+      .section_banner_heading {
+         color: setColor2(white1);
+         span {
+            background: linear-gradient(0deg, transparent 15%, setColor2(orange1) 15%, setColor2(orange1) 65%);
+         }
+      }
+
+      .section_banner_text {
+         color: setColor2(white2);
+      }
+
+      .section_banner_button {
+         @include btn2(15px, 40px, 0, 0, setColor2(white1), setColor2(yellou1), 3px);
+      }
+   }
+}
+
+.footer {
+   background-color: setColor2(darkGrey2);
+}
